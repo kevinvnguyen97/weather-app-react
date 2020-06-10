@@ -1,0 +1,13 @@
+#weather-display {
+    min-width: 200px;
+}
+
+#current-weather-card {
+    width: 100%;
+    /* margin: 10px; */
+    padding: 20px;
+}
+
+#city-name {
+    padding-bottom: 10px;
+}
