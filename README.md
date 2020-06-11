@@ -15,7 +15,7 @@ infographic for any weather condition.
 
 ## Installation
 
-No installation necessary. Simply open the following link: https://thaninjapower.github.io/homework-6
+No installation necessary. Simply open [this link](https://peaceful-harbor-68017.herokuapp.com/).
 
 ## Usage
 
