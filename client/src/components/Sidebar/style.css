@@ -9,3 +9,12 @@
 #city-search-list {
     color: black;
 }
+
+.city-history-btn {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    border: none;
+    background-color: transparent;
+}

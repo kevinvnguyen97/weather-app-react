@@ -11,3 +11,8 @@
 #city-name {
     padding-bottom: 10px;
 }
+
+#forecast-list {
+    align-items: center;
+    display: flex;
+}
