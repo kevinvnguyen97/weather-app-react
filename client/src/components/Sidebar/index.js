@@ -51,7 +51,7 @@ class Sidebar extends Component {
                     <ul className="list-group list-group-flush" id="city-search-list">
                         <li className="list-group-item">Searched Cities</li>
                         {this.props.searchHistory.map(city =>
-                            <li className="list">
+                            <li className="list-group-item list">
                             <button
                                 className="city-history-btn list-group-item list-group-item-action flex-column align-items-start"
                                 onClick={this.cityHistorySubmit}

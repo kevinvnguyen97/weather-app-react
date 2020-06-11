@@ -13,7 +13,7 @@ function WeatherDisplay(props) {
                 currentWeather={props.currentWeather}
                 date={new Date()}
             />
-            <h2>5-Day Forecast:</h2>
+            {(props.forecast.length !== 0) && (<h2>{props.forecast.length}-Day Forecast:</h2>)}
             <div className="row" id="forecast-list">
                 {props.forecast.map((weather, i) => {
                     let now = new Date();

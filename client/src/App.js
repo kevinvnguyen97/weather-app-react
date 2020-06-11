@@ -53,9 +53,10 @@ class App extends Component {
 
         axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
           .then(response => {
+            console.log(response);
             var forecastArray = [];
 
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= response.data.daily.length - 1; i++) {
               forecastArray.push({
                 weather_icon: `https://openweathermap.org/img/w/${response.data.daily[i].weather[0].icon}.png`,
                 temperature: response.data.daily[i].temp.day,
