@@ -15,7 +15,7 @@ infographic for any weather condition.
 
 ## Installation
 
-No installation necessary. Simply open [this link](https://peaceful-harbor-68017.herokuapp.com/).
+No installation necessary. Simply open [this link](https://dry-everglades-10534.herokuapp.com/).
 
 ## Usage
 
