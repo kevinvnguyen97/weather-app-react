@@ -9,6 +9,7 @@ import './App.css';
 class App extends Component {
   state = {
     darkMode: false,
+    search_history: [],
     current_city: {
       name: '',
       lat: null,
@@ -24,13 +25,17 @@ class App extends Component {
     },
     forecast: []
   }
-  
+
   getCityWeather = cityInput => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
       .then(response => {
-        console.log(`Server response:`);
-        console.log(response)
-        console.log(`Data: ${response}`);
+        let searchHistory = this.state.search_history;
+        if (searchHistory.indexOf(response.data.name) === -1) {
+          searchHistory.push(response.data.name);
+          this.setState({
+            search_history: searchHistory
+          });
+        }
 
         this.setState({
           current_city: {
@@ -47,29 +52,25 @@ class App extends Component {
         });
 
         axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
-        .then(response => {
-          console.log(`Server response: ${response}`);
-          console.log(`Data: ${response}`);
-  
-          var forecastArray = [];
-  
-          for (let i = 1; i <= 5; i++) {
-            forecastArray.push({
-              weather_icon: `https://openweathermap.org/img/w/${response.data.daily[i].weather[0].icon}.png`,
-              temperature: response.data.daily[i].temp.day,
-              humidity: response.data.daily[i].humidity
-            });
-          }
-  
-          this.setState( { forecast: forecastArray } );
+          .then(response => {
+            var forecastArray = [];
 
-        }).catch(err => console.log(err));
+            for (let i = 1; i <= 5; i++) {
+              forecastArray.push({
+                weather_icon: `https://openweathermap.org/img/w/${response.data.daily[i].weather[0].icon}.png`,
+                temperature: response.data.daily[i].temp.day,
+                humidity: response.data.daily[i].humidity
+              });
+            }
+
+            this.setState({ forecast: forecastArray });
+
+          }).catch(err => console.log(err));
         return response;
       }).catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.date);
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-dark">
@@ -78,6 +79,7 @@ class App extends Component {
 
         <div className="row container-fluid">
           <Sidebar
+            searchHistory={this.state.search_history}
             getCityWeather={this.getCityWeather}
           />
           <WeatherDisplay

@@ -4,28 +4,20 @@ import "./style.css";
 
 class Sidebar extends Component {
     state = {
-        search: '',
-        search_history: []
+        search: ''
     }
 
-    handleSearchChange = ( { target: { value } } ) => {
-        console.log(`Search input: ${value}`);
-        this.setState( { search: value } );
+    handleSearchChange = ({ target: { value } }) => {
+        this.setState({ search: value });
     }
 
     citySubmit = e => {
         e.preventDefault();
-        console.log("Getting weather with search: " + this.state.search);
-        console.log("Search history: " + this.state.search_history);
         this.props.getCityWeather(this.state.search);
+    }
 
-        let searchHistory = this.state.search_history;
-        if (searchHistory.indexOf(this.state.search) === -1) {
-            searchHistory.push(this.state.search);
-            this.setState({
-                search_history: searchHistory
-            });
-        }
+    cityHistorySubmit = ( { target: value } ) => {
+        this.props.getCityWeather(value.innerHTML);
     }
 
     render() {
@@ -58,7 +50,16 @@ class Sidebar extends Component {
                 <div className="card" id="search-history-card">
                     <ul className="list-group list-group-flush" id="city-search-list">
                         <li className="list-group-item">Searched Cities</li>
-                        {this.state.search_history.map(city => <a className="list-group-item list-group-item-action flex-column align-items-start" href="">{city}</a>)}
+                        {this.props.searchHistory.map(city =>
+                            <li className="list">
+                            <button
+                                className="city-history-btn list-group-item list-group-item-action flex-column align-items-start"
+                                onClick={this.cityHistorySubmit}
+                            >
+                                {city}
+                            </button>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
